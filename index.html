@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>...</title>
+  <style>
+    html, body {
+      height: 100%;
+      width: 100%;
+      background: linear-gradient(135deg, #0a1628 0%, #122139 50%, #1a2f4d 100%);
+      overflow: hidden;
+      margin: 0;
+      padding: 0;
+    }
+
+    .rose-container {
+      width: 100px;
+      height: 300px;
+      position: absolute;
+      transform: scale(0.4);
+      animation: fall linear infinite;
+    }
+
+    .rose-container div {
+      position: absolute;
+    }
+
+    .glass {
+      height: 420px;
+      width: 250px;
+      border: 3px solid rgba(255, 255, 255, 0.5);
+      border-radius: 300px 300px 0px 0px;
+      left: -80px;
+      top: -100px;
+      border-bottom: 15px solid rgba(255, 255, 255, 0.5);
+    }
+
+    .glass:after {
+      width: 8px;
+      background: rgba(255, 255, 255, 0.28);
+      content: '';
+      position: absolute;
+      height: 80px;
+      border-radius: 100px;
+      left: 10px;
+      top: 180px;
+    }
+
+    .glass:before {
+      width: 8px;
+      background: rgba(255, 255, 255, 0.28);
+      content: '';
+      position: absolute;
+      height: 15px;
+      border-radius: 100px;
+      left: 10px;
+      top: 280px;
+    }
+
+    .glow {
+      position: absolute;
+      width: 170px;
+      height: 170px;
+      border-radius: 100%;
+      border: 1px solid rgba(245, 148, 184, 0.47);
+      box-shadow: 0px 0px 10px #f594b8;
+      left: -40px;
+      top: -40px;
+      animation: glowing 2.5s ease-in-out infinite;
+    }
+
+    .rose-petals > div {
+      background: #d52d58;
+      width: 45px;
+      height: 80px;
+      position: absolute;
+      transition: all 0.5s ease-out;
+    }
+
+    .rose-petals > div:nth-child(1) {
+      border-radius: 15px;
+      left: 20px;
+      top: -6px;
+      background: #d52d58;
+    }
+
+    .rose-petals > div:nth-child(2), 
+    .rose-petals > div:nth-child(4), 
+    .rose-petals > div:nth-child(6) {
+      border-radius: 0px 30px 0px 30px;
+      background: #b81b43;
+      left: 0;
+      transform-origin: bottom right;
+    }
+
+    .rose-petals > div:nth-child(3), 
+    .rose-petals > div:nth-child(5), 
+    .rose-petals > div:nth-child(7) {
+      border-radius: 30px 0px 30px 0px;
+      left: 40px;
+      transform-origin: bottom left;
+    }
+
+    .rose-petals > div:nth-child(2) {
+      animation: openRose2 3s ease-in-out forwards;
+      z-index: 5;
+      background: #9e183a;
+      top: 10px;
+      height: 70px;
+      animation-delay: 2s;
+    }
+
+    .rose-petals > div:nth-child(3) {
+      animation: openRose3 3s ease-in-out forwards;
+      z-index: 4;
+      background: #9e183a;
+      top: 10px;
+      height: 70px;
+      animation-delay: 2s;
+    }
+
+    .rose-petals > div:nth-child(4) {
+      animation: openRose4 3s ease-in-out forwards;
+      z-index: 3;
+      background: #b81b43;
+      top: 5px;
+      height: 75px;
+      animation-delay: 2s;
+    }
+
+    .rose-petals > div:nth-child(5) {
+      animation: openRose5 3s ease-in-out forwards;
+      z-index: 2;
+      background: #b81b43;
+      top: 5px;
+      height: 75px;
+      animation-delay: 2s;
+    }
+
+    .rose-petals > div:nth-child(6) {
+      animation: openRose6 3s ease-in-out forwards;
+      z-index: 1;
+      background: #c9204b;
+      animation-delay: 2s;
+    }
+
+    .rose-petals > div:nth-child(7) {
+      animation: openRose7 3s ease-in-out forwards;
+      z-index: 0;
+      background: #c9204b;
+      animation-delay: 2s;
+    }
+
+    .rose-leaves > div:nth-last-child(1) {
+      width: 55px;
+      height: 30px;
+      background: #338f37;
+      position: absolute;
+      top: 60px;
+      left: 15px;
+      border-radius: 100px;
+    }
+
+    .rose-leaves > div:nth-child(1) {
+      width: 6px;
+      height: 230px;
+      border: none;
+      top: 80px;
+      background: #066406;
+      left: 40px;
+    }
+
+    .thorns > div {
+      width: 30px;
+      height: 30px;
+      background: #066406;
+      top: 100px;
+      left: 10px;
+    }
+
+    .thorns > div:after {
+      width: 41px;
+      height: 31px;
+      border-radius: 100%;
+      background: #122139;
+      content: "";
+      position: absolute;
+      left: -12px;
+      top: 17px;
+    }
+
+    .thorns > div:before {
+      width: 41px;
+      height: 31px;
+      border-radius: 100%;
+      background: #122139;
+      content: "";
+      position: absolute;
+      left: -11px;
+      top: -11px;
+      z-index: 0;
+    }
+
+    .thorns > div:nth-child(2) {
+      top: 150px;
+      transform: rotate(180deg);
+      left: 45px;
+    }
+
+    .thorns > div:nth-child(3) {
+      top: 180px;
+    }
+
+    .thorns > div:nth-child(4) {
+      top: 220px;
+      transform: rotate(180deg);
+      left: 45px;
+    }
+
+    .sparkles {
+      bottom: -40px;
+    }
+
+    .sparkles > div {
+      width: 4px;
+      height: 4px;
+      border-radius: 100px;
+      background: #ff96c0;
+      box-shadow: 0px 0px 12px 2px #ff4e85;
+      bottom: 0;
+      opacity: 0;
+      animation: sparkle 4s ease-in-out infinite;
+    }
+
+    .sparkles > div:nth-child(1) {
+      left: 60px;
+      animation-delay: 3s;
+    }
+
+    .sparkles > div:nth-child(2) {
+      left: 158px;
+      animation-delay: 2s;
+    }
+
+    .sparkles > div:nth-child(3) {
+      left: -22px;
+      animation-delay: 1s;
+    }
+
+    .sparkles > div:nth-child(4) {
+      left: 10px;
+      animation-delay: 1s;
+    }
+
+    .sparkles > div:nth-child(5) {
+      left: 177px;
+      animation-delay: 3s;
+    }
+
+    .sparkles > div:nth-child(6) {
+      left: -82px;
+      animation-delay: 2s;
+    }
+
+    .sparkles > div:nth-child(7) {
+      left: 45px;
+      animation-delay: 3s;
+    }
+
+    .sparkles > div:nth-child(8) {
+      left: 74px;
+      animation-delay: 3s;
+    }
+
+    .sparkles > div:nth-child(9) {
+      left: -79px;
+      animation-delay: 2s;
+    }
+
+    @keyframes fall {
+      from {
+        top: -400px;
+        transform: scale(0.4) rotate(0deg);
+      }
+      to {
+        top: 100vh;
+        transform: scale(0.4) rotate(720deg);
+      }
+    }
+
+    @keyframes sparkle {
+      50% {
+        opacity: 1;
+      }
+      100% {
+        bottom: 250px;
+      }
+    }
+
+    @keyframes openRose2 {
+      50% {
+        transform: rotate(-90deg);
+        top: 80px;
+        left: 100px;
+      }
+      100% {
+        transform: rotate(-60deg);
+        top: 210px;
+        left: -30px;
+      }
+    }
+
+    @keyframes openRose3 {
+      100% {
+        transform: rotate(60deg);
+      }
+    }
+
+    @keyframes openRose4 {
+      100% {
+        transform: rotate(-30deg);
+      }
+    }
+
+    @keyframes openRose5 {
+      100% {
+        transform: rotate(30deg);
+      }
+    }
+
+    @keyframes openRose6 {
+      100% {
+        transform: rotate(-45deg);
+      }
+    }
+
+    @keyframes openRose7 {
+      100% {
+        transform: rotate(45deg);
+      }
+    }
+
+    @keyframes glowing {
+      50% {
+        box-shadow: 0px 0px 60px #f594b8;
+      }
+    }
+
+    .title {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      font-family: 'Georgia', serif;
+      font-size: 4em;
+      color: #fff;
+      text-align: center;
+      text-shadow: 0 0 20px rgba(245, 148, 184, 0.8),
+                   0 0 40px rgba(245, 148, 184, 0.6);
+      z-index: 10000;
+      pointer-events: none;
+      animation: titleGlow 3s ease-in-out infinite;
+    }
+
+    @keyframes titleGlow {
+      0%, 100% {
+        text-shadow: 0 0 20px rgba(245, 148, 184, 0.8),
+                     0 0 40px rgba(245, 148, 184, 0.6);
+      }
+      50% {
+        text-shadow: 0 0 30px rgba(245, 148, 184, 1),
+                     0 0 60px rgba(245, 148, 184, 0.8),
+                     0 0 80px rgba(245, 148, 184, 0.6);
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="title"></div>
+
+  <script>
+    function createRose() {
+      const container = document.createElement('div');
+      container.className = 'rose-container';
+      
+      container.style.left = Math.random() * 100 + '%';
+      container.style.top = '-400px';
+      
+      const duration = 8 + Math.random() * 6;
+      const delay = Math.random() * 3;
+      container.style.animationDuration = duration + 's';
+      container.style.animationDelay = delay + 's';
+
+      const hueRotate = Math.random() * 60 - 30;
+      const brightness = 0.8 + Math.random() * 0.4;
+      container.style.filter = `hue-rotate(${hueRotate}deg) brightness(${brightness})`;
+
+      container.innerHTML = `
+        <div class="glass"></div>
+        <div class="thorns">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <div class="glow"></div>
+        <div class="rose-leaves">
+          <div></div>
+          <div></div>
+        </div>
+        <div class="rose-petals">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+        <div class="sparkles">
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+          <div></div>
+        </div>
+      `;
+
+      document.body.appendChild(container);
+
+      setTimeout(() => {
+        container.remove();
+      }, (duration + delay) * 1000 + 1000);
+    }
+
+    setInterval(createRose, 250);
+
+    for (let i = 0; i < 40; i++) {
+      setTimeout(createRose, i * 100);
+    }
+  </script>
+</body>
+</html>
